@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        scaffoldBackgroundColor: const Color.fromRGBO(237, 238,	240, 1),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -55,16 +56,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _index = 0;
+  static const List<String> _statuses = ['帕维尔-杜罗夫就是我', '我是帕维尔-杜罗夫', '孔雀'];
+  String _status = _statuses[0];
 
-  void _incrementCounter() {
+  void _changeStatus() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      _index++;
+      _status = _statuses[_index % 3];
     });
   }
 
@@ -77,47 +76,302 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+        child: Container(
+            width: 1000,
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.only(top: 10),
+            child: Wrap(
+              spacing: 10,
+              children: <Widget>[
+                Container(
+                  color: Colors.white,
+                  padding: const EdgeInsets.all(15.0),
+                  child: Container(
+                    constraints: const BoxConstraints(
+                      maxWidth: 250,
+                    ),
+                    child: Wrap(
+                      direction: Axis.vertical,
+                      spacing: 15,
+                      children: [
+                        Container (
+                          width: 250,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(2)),
+                          ),
+                          constraints: const BoxConstraints(
+                            minHeight: 250,
+                          ),
+                          child: Image.asset('assets/images/durov.jpg')
+                        ),
+                        Container(
+                          width: 250,
+                          decoration: const BoxDecoration(
+                            color: Color.fromRGBO(92, 128, 180, 1),
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                          constraints: const BoxConstraints(
+                            minHeight: 35,
+                          ),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            style: TextStyle(color: Colors.white),
+                            'Отправить подарок'
+                          ),
+                        ),
+                        Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          direction: Axis.horizontal,
+                          spacing: 10,
+                          children: [
+                            Container(
+                              width: 190,
+                              constraints: const BoxConstraints(
+                                minHeight: 35,
+                              ),
+                              alignment: Alignment.center,
+                              decoration: const BoxDecoration(
+                                color: Color.fromRGBO(92, 128, 180, 1),
+                                borderRadius: BorderRadius.all(Radius.circular(5)),
+                              ),
+                              child: const Text(
+                                  style: TextStyle(color: Colors.white),
+                                  'Подписаться'
+                              ),
+                            ),
+                            Container(
+                              width: 50,
+                              constraints: const BoxConstraints(
+                                maxHeight: 35,
+                              ),
+                              decoration: const BoxDecoration(
+                                color: Color.fromRGBO(237, 238,	240, 1),
+                                borderRadius: BorderRadius.all(Radius.circular(5)),
+                              ),
+                              alignment: Alignment.center,
+                              child: const Text(
+                                style: TextStyle(fontSize: 30, color: Color.fromRGBO(151, 164, 187, 1)),
+                                '...'
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 700,
+                  color: Colors.white,
+                  padding: const EdgeInsets.all(15.0),
+                  child: Wrap(
+                    children: <Widget>[
+                      Wrap(
+                        direction: Axis.vertical,
+                        spacing: 15,
+                        children: <Widget>[
+                          Container(
+                            width: 670,
+                            decoration: const BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
+                                      color: Color.fromRGBO(237, 238,	240, 1),
+                                      width: 1.0,
+                                    )
+                                )
+                            ),
+                            padding: const EdgeInsets.only(bottom: 15.0),
+                            child: Wrap(
+                              children: <Widget>[
+                                Column(
+                                  children: [
+                                    const Row(
+                                      children: <Widget>[
+                                        Text(
+                                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                          "Павел Дуров"
+                                        ),
+                                        Spacer(),
+                                        Text(
+                                          style: TextStyle(color: Color.fromRGBO(169, 171, 191, 1), fontWeight: FontWeight.bold),
+                                          "заходил 14 декабря 2018 в 16:28"
+                                        )
+                                      ]
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Text (
+                                          style: const TextStyle(fontWeight: FontWeight.w600),
+                                          _status,
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ), // title
+                          Container(
+                            width: 700,
+                            decoration: const BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
+                                      color: Color.fromRGBO(237, 238,	240, 1),
+                                      width: 1.0,
+                                    )
+                                )
+                            ),
+                            padding: const EdgeInsets.only(bottom: 15.0),
+                            alignment: AlignmentDirectional.centerStart,
+                            child: Wrap(
+                              direction: Axis.vertical,
+                              spacing: 20,
+                              alignment: WrapAlignment.start,
+                              children: [
+                                Container(
+                                  constraints: const BoxConstraints(
+                                    maxWidth: 350,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 216,
+                                        alignment: AlignmentDirectional.centerStart,
+                                        child: const Wrap(
+                                          spacing: 10,
+                                          direction: Axis.vertical,
+                                          children: [
+                                            Text(
+                                              style: TextStyle(color: Color.fromRGBO(169, 171, 191, 1), fontWeight: FontWeight.bold),
+                                              "Дата рождения:"
+                                            ),
+                                            Text(
+                                              style: TextStyle(color: Color.fromRGBO(169, 171, 191, 1), fontWeight: FontWeight.bold),
+                                              "Город:"
+                                            ),
+                                            Text(
+                                              style: TextStyle(color: Color.fromRGBO(169, 171, 191, 1), fontWeight: FontWeight.bold),
+                                              "Место работы:"
+                                            ),
+                                            Text(
+                                              style: TextStyle(color: Color.fromRGBO(169, 171, 191, 1), fontWeight: FontWeight.bold),
+                                              "Веб-сайт:"
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const Wrap(
+                                        spacing: 10,
+                                        direction: Axis.vertical,
+                                        alignment: WrapAlignment.start,
+                                        children: [
+                                          Text(
+                                            style: TextStyle(color: Color.fromRGBO(92, 128, 180, 1)),
+                                            "10 октября 1984 г."
+                                          ),
+                                          Text(
+                                            style: TextStyle(color: Color.fromRGBO(92, 128, 180, 1)),
+                                            "Санкт-Петербург"
+                                          ),
+                                          Text(
+                                            style: TextStyle(color: Color.fromRGBO(92, 128, 180, 1)),
+                                            "Telegram"
+                                          ),
+                                          Text(
+                                            style: TextStyle(color: Color.fromRGBO(92, 128, 180, 1)),
+                                            "http://t.me/durov"
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  width: 670,
+                                  alignment: AlignmentDirectional.center,
+                                  child: const Text(
+                                      style: TextStyle(color: Color.fromRGBO(92, 128, 180, 1)),
+                                      "Показать подробную информацию"
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ), // description
+                          const SizedBox(
+                            width: 670,
+                            child: Wrap(
+                              direction: Axis.horizontal,
+                              alignment: WrapAlignment.center,
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              spacing: 15,
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(
+                                      style: TextStyle(color: Color.fromRGBO(92, 128, 180, 1), fontWeight: FontWeight.bold, fontSize: 20),
+                                      "5.9M"
+                                    ),
+                                    Text(
+                                      style: TextStyle(color: Color.fromRGBO(169, 171, 191, 1), fontWeight: FontWeight.bold),
+                                      "подписчиков"
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      style: TextStyle(color: Color.fromRGBO(92, 128, 180, 1), fontWeight: FontWeight.bold, fontSize: 20),
+                                      "254"
+                                    ),
+                                    Text(
+                                      style: TextStyle(color: Color.fromRGBO(169, 171, 191, 1), fontWeight: FontWeight.bold),
+                                      "фотографии"
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      style: TextStyle(color: Color.fromRGBO(92, 128, 180, 1), fontWeight: FontWeight.bold, fontSize: 20),
+                                      "6"
+                                    ),
+                                    Text(
+                                      style: TextStyle(color: Color.fromRGBO(169, 171, 191, 1), fontWeight: FontWeight.bold),
+                                      "видозаписей"
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      style: TextStyle(color: Color.fromRGBO(92, 128, 180, 1), fontWeight: FontWeight.bold, fontSize: 20),
+                                      "243K"
+                                    ),
+                                    Text(
+                                      style: TextStyle(color: Color.fromRGBO(169, 171, 191, 1), fontWeight: FontWeight.bold),
+                                      "подарков"
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ), // statistics
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+          ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: _changeStatus,
+        tooltip: 'changeStatus',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
